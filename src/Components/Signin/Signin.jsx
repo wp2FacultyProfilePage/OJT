@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './Signin.css'; // Create a separate CSS file and import it
 
 const SignIn = () => {
     const [formData, setFormData] = useState({
@@ -21,32 +21,18 @@ const SignIn = () => {
     };
 return (
     <div className="signin-container">
-      <h2>Sign In</h2>
+      <h2>SIGN IN</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+        <div className="mb-3">
+          <input type="text" id="username" name="username" value={formData.username}
+            onChange={handleChange} placeholder='Username...' required/>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+        <div className="mb-3">
+          <input type="password" id="password" name="password" value={formData.password}
+            onChange={handleChange} placeholder='Password...' required/>
         </div>
-        <div className="form-group">
-          <button type="submit">Sign In</button>
+        <div className="mb-3">
+          <button type="submit" id="signinbtn">SIGN IN</button>
         </div>
       </form>
     </div>
