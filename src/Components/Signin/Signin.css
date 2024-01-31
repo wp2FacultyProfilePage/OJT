@@ -1,0 +1,56 @@
+body {
+    /* background-image: url('pimentel_bg.JPG'); */
+    font-family: 'Arial', sans-serif;
+    background-color: #cccccce7;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+.signin-container {
+    background: #e6e6e6;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    transition: background 0.3s ease-in-out;
+}
+
+#username,#password{
+    width: 100%;
+    border-radius: 20px;
+}
+
+#username:hover,#password:hover{
+    background-color: #fefff6;
+}
+
+#signinbtn{
+    width: 100%;
+    border-radius: 20px;
+    border: 0px;
+    color:#e6e6e6;
+    background-color: #80170f;
+    padding: 5px;
+    margin: 10px 0 0 0;
+}
+#signin:hover{
+    background: #720202;
+    transition: background 0.2s ease-in;
+}
+
+.form-group {
+    margin-top: 10px;
+}
+
+.signin-container:hover {
+    background: #e0e0e0;
+}
+
+.signin-container h2 {
+    color: #333;
+}
