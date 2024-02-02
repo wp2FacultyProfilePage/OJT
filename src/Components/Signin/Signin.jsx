@@ -1,42 +1,83 @@
-import React, { useState } from 'react';
-import './Signin.css'; // Create a separate CSS file and import it
+// Signinform.jsx
 
-const SignIn = () => {
-    const [formData, setFormData] = useState({
-      username: '',
-      password: '',
-    });
-  
-    const handleChange = (e) => {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      
-      console.log('Form submitted:', formData);
-    };
-return (
-    <div className="signin-container">
-      <h2>SIGN IN</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <input type="text" id="username" name="username" value={formData.username}
-            onChange={handleChange} placeholder='Username...' required/>
-        </div>
-        <div className="mb-3">
-          <input type="password" id="password" name="password" value={formData.password}
-            onChange={handleChange} placeholder='Password...' required/>
-        </div>
-        <div className="mb-3">
-          <button type="submit" id="signinbtn">SIGN IN</button>
-        </div>
-      </form>
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Validation from './signinvalidation';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+
+function Signinform() {
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+
+  const handleInput = (event) => {
+    setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setErrors(Validation(values));
+
+    // Only check name and email errors
+    if (errors.name === "" && errors.email === "") {
+      axios.post('http://localhost:8081/signin', values, { headers: { 'Content-Type': 'application/json' } })
+        .then(res => {
+          navigate ('/')
+        })
+        .catch(err => console.log(err));
+    }
+  }
+
+  return (
+    <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
+      <div className='bg-white p-3 rounded w-25'>
+        <h2>Signin</h2>
+        <form action='' onSubmit={handleSubmit}>
+          <div className='mb-3'>
+            <label htmlFor='name'><strong>Name</strong></label>
+            <input
+              type='text'
+              placeholder='Enter Name'
+              name='name'
+              onChange={handleInput}
+              className='form-control rounded-0'
+            />
+            {errors.name && <span className='text-danger'>{errors.name}</span>}
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='email'><strong>Email</strong></label>
+            <input
+              type='email'
+              placeholder='Enter Email'
+              name='email'
+              onChange={handleInput}
+              className='form-control rounded-0'
+            />
+            {errors.email && <span className='text-danger'>{errors.email}</span>}
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='password'><strong>Password</strong></label>
+            <input
+              type='password'
+              placeholder='Enter Password'
+              name='password'
+              onChange={handleInput}
+              className='form-control rounded-0'
+            />
+            {/* Password error message removed */}
+          </div>
+          <button className='btn btn-success w-100 rounded-0'>Sign Up</button>
+          <p></p>
+          <Link to="/" className='btn btn-default border w-100 bg-light text-decoration-none'> Login </Link>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
-export default SignIn;
+export default Signinform;

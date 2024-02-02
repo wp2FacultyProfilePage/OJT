@@ -15,7 +15,7 @@ p{
     margin: 0 0 0 0;
 }
 #rememberMe{
-    font-size: 5px;
+    font-size: 15px;
     margin: 0 0 0 0;
 }
 #username,#password{
@@ -75,7 +75,7 @@ p{
 }
 
 #forgot,#register{
-    font-size: 5px;
+    font-size: 10px;
     display: flex;
     margin: 10px 0 0 0;
 }
